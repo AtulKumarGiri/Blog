@@ -1,0 +1,44 @@
+.bg-green{
+    background-color: #04aa6d !important;
+
+}
+.navbar{
+    padding: 0px !important;
+}
+.navbar-nav .nav-link{
+    color: white!important;
+    font-weight: 600;
+    padding: 8px 18px !important;
+}
+
+.card-shadow{
+    box-shadow: 0 2px 7px 0 rgb(0 0 0 / 10%);
+    border-radius: 5px;
+}
+
+.category-heading{
+    padding: 10px 12px;
+    border-left: 6px solid black;
+    background-color: rgba(117, 113, 113, 0.449);
+}
+
+.post-heading{
+    font-size: 26px;
+    color: #000;
+}
+
+.underline{
+    height: 3px;
+    width: 60px;
+    background-color: #e71212 !important;
+    margin-bottom: 10px;
+}
+
+.bg-gray{
+    background-color: gainsboro;
+    color: black;
+}
+
+.container .border-area{
+    border: 1.8px solid black;
+}
