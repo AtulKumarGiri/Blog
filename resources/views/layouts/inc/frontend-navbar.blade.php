@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <img src="{{asset('assets/images/logo.webp')}}" class="w-100" alt="logo">
+                <img src="{{asset('assets/images/logo.webp')}}" class="w-50" alt="logo">
             </div>
             <div class="col-md-9 my-auto">
                 <div class="border text-center p-2">
@@ -22,6 +22,7 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ url('/')}}">Home</a>
                 </li>
+                
                 
                 <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,6 +44,14 @@
                         <a class="nav-link" href="{{url('tutorial/'.$cateitem->slug)}}">{{$cateitem->name}}</a>
                     </li>
                 @endforeach
+
+                    
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url('/login')}}">Login</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url('/register')}}">Register</a>
+                    </li>
             </ul>
         </div>
     </div>

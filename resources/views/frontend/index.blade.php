@@ -51,7 +51,7 @@
             <div class="col-md-8">
                 @foreach($latest_posts as $latest_post_item)
                 <div class="card card-body mb-3">
-                    <a href="{{url('tutorial/'.$latest_post_item->category->slug.'/'.$latest_post_item->slug) }}" class="text-decoration-none">
+                    <a href="{{url('tutorial/'.$latest_post_item->slug.'/'.$latest_post_item->slug) }}" class="text-decoration-none">
                         <h5 class="text-dark mb-0">{{$latest_post_item->name}}</h5>
                     </a>
                     <h6>Posted On: {{$latest_post_item->created_at->format('d-m-y')}}</h6>

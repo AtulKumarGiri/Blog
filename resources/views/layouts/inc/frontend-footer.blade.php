@@ -31,7 +31,7 @@
         <p class="mb-0">
             &copy; Copyright at <a href="#">Blog</a>
             All right reserved.
-            Designed and Developed by Atul Kumar Giri {{date(('d-m-y'))}}.
+            Designed and Developed by XYZ.
         </p>
     </div>
 </div>
