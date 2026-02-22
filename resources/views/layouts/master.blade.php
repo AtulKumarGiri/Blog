@@ -14,7 +14,7 @@
 
     <!-- Scripts -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    
 
     <!-- Summernote Link -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">

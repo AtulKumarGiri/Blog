@@ -1,77 +1,119 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+<div class="container-fluid">
+    <div class="container auth-container p-0">
 
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+        <header>
+            <a class="navbar-brand" href="{{ url('/') }}">&lt;/&gt; MyBlog</a>
+        </header>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+        <div class="row g-0">
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+            <!-- LEFT SIDE (Form) -->
+            <div class="col-lg-6 left-side d-flex flex-column justify-content-center">
+
+                <h1>Create Account</h1>
+                <p>Join our blog community and start sharing your ideas</p>
+
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="bi bi-person left-icon"></i>
+                            <input type="text"
+                                name="name"
+                                value="{{ old('name') }}"
+                                class="form-control @error('name') is-invalid @enderror"
+                                placeholder="Enter your full name"
+                                required>
                         </div>
+                        @error('name')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <div class="input-wrapper">
+                            <i class="bi bi-envelope left-icon"></i>
+                            <input type="email"
+                                name="email"
+                                value="{{ old('email') }}"
+                                class="form-control @error('email') is-invalid @enderror"
+                                placeholder="Enter your email"
+                                required>
                         </div>
+                        @error('email')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <div class="input-wrapper">
+                            <i class="bi bi-lock left-icon"></i>
+                            <input type="password"
+                                name="password"
+                                id="password"
+                                class="form-control @error('password') is-invalid @enderror"
+                                placeholder="Enter password"
+                                required>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                            <span class="right-icon" onclick="togglePassword('password','toggleIcon1')">
+                                <i class="bi bi-eye" id="toggleIcon1"></i>
+                            </span>
                         </div>
+                        @error('password')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                    <!-- Confirm Password -->
+                    <div class="mb-4">
+                        <label class="form-label">Confirm Password</label>
+                        <div class="input-wrapper">
+                            <i class="bi bi-lock left-icon"></i>
+                            <input type="password"
+                                name="password_confirmation"
+                                id="confirmPassword"
+                                class="form-control"
+                                placeholder="Confirm password"
+                                required>
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+                            <span class="right-icon" onclick="togglePassword('confirmPassword','toggleIcon2')">
+                                <i class="bi bi-eye" id="toggleIcon2"></i>
+                            </span>
                         </div>
+                    </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    <button type="submit" class="btn-login mb-3">
+                        Sign Up
+                    </button>
+
+                    <hr>
+
+                    <div class="bottom-text text-center">
+                        Already have an account?
+                        <a href="{{ route('login') }}">Login</a>
+                    </div>
+
+                </form>
             </div>
+
+            <!-- RIGHT SIDE (Illustration) -->
+            <div class="col-lg-6 right-side">
+                <img src="{{ asset('assets/images/register.png') }}" alt="Register Illustration">
+            </div>
+
         </div>
     </div>
 </div>
+
 @endsection

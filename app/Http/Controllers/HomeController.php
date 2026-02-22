@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $banner = HomeBanner::where('status',1)->latest()->first();
+        return view('home', compact('banner'));
     }
 }

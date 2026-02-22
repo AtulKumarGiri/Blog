@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Category')
+@section('title', 'Add Category')
 
 @section('content')
 
@@ -9,67 +9,172 @@
         <div class="card-header">
             <h4>Add Category</h4>
         </div>
+
         <div class="card-body">
+
+            {{-- Validation Errors --}}
             @if ($errors->any())
                 <div class="alert alert-danger">
                     @foreach($errors->all() as $error)
-                        <div>{{$error}}</div>
+                        <div>{{ $error }}</div>
                     @endforeach
                 </div>
             @endif
 
-            <form action="{{ url('admin/add-category') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('admin/add-category') }}" 
+                  method="POST" 
+                  enctype="multipart/form-data"
+                  class="row">
                 @csrf
 
-                <div class="mb-3">
-                    <label for="">Category Name</label>
-                    <input type="text" name="name" class="form-control">
+                {{-- Category Name --}}
+                <div class="col-md-4 mb-3">
+                    <label>Category Name</label>
+                    <input type="text" 
+                           name="name" 
+                           id="name"
+                           value="{{ old('name') }}" 
+                           class="form-control">
                 </div>
 
-                <div class="mb-3">
-                    <label for="">Slug</label>
-                    <input type="text" name="slug" class="form-control">
-                </div>
-                
-                <div class="mb-3">
-                    <label for="">Description</label>
-                    <textarea rows="5" id="my_summernote" name="description" class="form-control"></textarea>
+                {{-- Slug --}}
+                <div class="col-md-4 mb-3">
+                    <label>Slug</label>
+                    <input type="text" 
+                           name="slug" 
+                           id="slug"
+                           value="{{ old('slug') }}" 
+                           class="form-control">
                 </div>
 
-                <div class="mb-3">
-                    <label for="">Image</label>
+                {{-- Parent Category --}}
+                <div class="col-md-4 mb-3">
+                    <label>Parent Category</label>
+                    <select name="parent_id" class="form-control">
+                        <option value="">-- None --</option>
+                        @foreach($categories as $cat)
+                            <option value="{{ $cat->id }}">
+                                {{ $cat->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- Description --}}
+                <div class="col-md-12 mb-3">
+                    <label>Description</label>
+                    <textarea rows="5" 
+                              id="my_summernote" 
+                              name="description" 
+                              class="form-control">{{ old('description') }}</textarea>
+                </div>
+
+                {{-- Image --}}
+                <div class="col-md-4 mb-3">
+                    <label>Category Image</label>
                     <input type="file" name="image" class="form-control">
                 </div>
-                <h6>SEO Tags</h6>
-                <div class="mb-3">
-                    <label for="">Meta Title</label>
-                    <input type="text" name="meta_title" class="form-control">
+
+                {{-- Sort Order --}}
+                <div class="col-md-4 mb-3">
+                    <label>Sort Order</label>
+                    <input type="number" 
+                           name="sort_order" 
+                           value="{{ old('sort_order', 0) }}" 
+                           class="form-control">
                 </div>
-                <div class="mb-3">
-                    <label for="">Meta Description</label>
-                    <input type="text" name="meta_description" class="form-control">
+
+                {{-- Canonical URL --}}
+                <div class="col-md-4 mb-3">
+                    <label>Canonical URL</label>
+                    <input type="text" 
+                           name="canonical_url" 
+                           value="{{ old('canonical_url') }}" 
+                           class="form-control">
                 </div>
-                <div class="mb-3">
-                    <label for="">Meta Keywords</label>
-                    <input type="text" name="meta_keyword" class="form-control">
+
+                <hr>
+
+                <h6>SEO Settings</h6>
+
+                {{-- Meta Title --}}
+                <div class="col-md-12 mb-3">
+                    <label>Meta Title</label>
+                    <input type="text" 
+                           name="meta_title" 
+                           value="{{ old('meta_title') }}" 
+                           class="form-control">
                 </div>
-                <h6>Status Mode</h6>
+
+                {{-- Meta Description --}}
+                <div class="col-md-6 mb-3">
+                    <label>Meta Description</label>
+                    <textarea name="meta_description" 
+                              class="form-control">{{ old('meta_description') }}</textarea>
+                </div>
+
+                {{-- Meta Keywords --}}
+                <div class="col-md-6 mb-3">
+                    <label>Meta Keywords</label>
+                    <textarea name="meta_keyword" 
+                              class="form-control">{{ old('meta_keyword') }}</textarea>
+                </div>
+
+                <hr>
+
+                <h6>Visibility Settings</h6>
+
                 <div class="row">
+
+                    {{-- Navbar Status --}}
                     <div class="col-md-3 mb-3">
-                        <label for="">Navbar Status</label>
-                        <input type="checkbox" name="navbar_status">
+                        <label>Show in Navbar</label><br>
+                        <input type="checkbox" 
+                               name="navbar_status" 
+                               value="1">
                     </div>
+
+                    {{-- Featured --}}
                     <div class="col-md-3 mb-3">
-                        <label for="">Status</label>
-                        <input type="checkbox" name="status">
+                        <label>Featured Category</label><br>
+                        <input type="checkbox" 
+                               name="is_featured" 
+                               value="1">
                     </div>
-                    <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">Save Category</button>
+
+                    {{-- Active Status --}}
+                    <div class="col-md-3 mb-3">
+                        <label>Active Status</label><br>
+                        <input type="checkbox" 
+                               name="status" 
+                               value="1">
                     </div>
+
+                    {{-- Submit --}}
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">
+                            Save Category
+                        </button>
+                    </div>
+
                 </div>
+
             </form>
+
         </div>
    </div>
 </div>
- 
+
+{{-- Auto Slug Script --}}
+<script>
+    document.getElementById('name').addEventListener('keyup', function() {
+        let slug = this.value
+            .toLowerCase()
+            .replace(/ /g,'-')
+            .replace(/[^\w-]+/g,'');
+
+        document.getElementById('slug').value = slug;
+    });
+</script>
+
 @endsection

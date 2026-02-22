@@ -30,7 +30,7 @@
                     @foreach($posts as $item)
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td>{{$item->name}}</td>
+                        <td>{{$item->category->name}}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->status == '1' ? 'Hidden':'Visible'}}</td>
                         <td><a href="{{ url('admin/post/'.$item->id) }}" class="btn btn-success">Edit</a></td>

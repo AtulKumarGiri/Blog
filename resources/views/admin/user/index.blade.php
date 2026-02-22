@@ -29,7 +29,17 @@
                         <td>{{$item->id}}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->email}}</td>
-                        <td>{{$item->role_as == '1' ? 'Admin':'User'}}</td>
+                        <!-- <td>{{$item->role_as == '1' ? 'Admin':'User'}}</td> -->
+                        <td>
+                            @if($item->role_as == '1')
+                                <span class="badge bg-success">Admin</span>
+                            @elseif($item->role_as == '0')
+                                <span class="badge bg-primary">User</span>      
+
+                            @else
+                                <span class="badge bg-danger">Blogger</span>
+                            @endif
+                        </td>
                         <td><a href="{{ url('admin/user/'.$item->id) }}" class="btn btn-success">Edit</a></td>
                     </tr>
                     @endforeach

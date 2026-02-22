@@ -1,37 +1,91 @@
-<div class="py-5 bg-dark text-white">
+<footer class="custom-footer mt-5 pt-5 pb-4">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <h5>Blog</h5>
-                <div class="underline"></div>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda repellendus maiores aliquid vel a, maxime distinctio omnis dolores soluta et voluptatum praesentium ratione doloribus quibusdam perspiciatis ipsa consequatur error consectetur tempora magnam obcaecati. Accusamus vel magnam blanditiis earum, tempore, repellat placeat nostrum iure repudiandae dolorum omnis impedit saepe perferendis ipsam doloribus tenetur dolore. Iste minus, odit modi nostrum quidem magni explicabo fugit quis ea? Placeat quisquam, ratione mollitia fugit illum tempora! Nobis eveniet voluptate reiciendis facilis sed neque sit recusandae.</p>
 
+            {{-- Logo & About --}}
+            <div class="col-md-4 mb-4">
+                <h4 class="footer-logo">
+                    </>MyBlog
+                </h4>
+
+                <p class="footer-text">
+                    MyBlog is a platform to learn coding, algorithms, and software development
+                    through practical tutorials and real-world examples.
+                </p>
+
+                <div class="footer-social d-flex gap-3 mt-3">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
             </div>
-            <div class="col-md-3">
-                <h5>Quick Links</h5>
-                <div class="underline"></div>
-                <div><a href="" class="text-white">Home</a></div>
-                <div><a href="" class="text-white">About Us</a></div>
-                <div><a href="" class="text-white">Contact Us</a></div>
-                <div><a href="" class="text-white">Need Promotion ?</a></div>
+
+            {{-- Company Links --}}
+            <div class="col-md-2 mb-4">
+                <h6 class="footer-heading">Company</h6>
+                <ul class="footer-links mt-3">
+                    @php
+                        $companyPages = \App\Models\Page::where('status',1)
+                                        ->where('show_in_footer',1)
+                                        ->whereIn('slug',['about-us','contact'])
+                                        ->get();
+                    @endphp
+
+                    @foreach($companyPages as $page)
+                        <li>
+                            <a href="{{ url($page->slug) }}">
+                                {{ $page->title }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
-            <div class="col-md-3">
-                <h5>Follow us on</h5>
-                <div class="underline"></div>
-                <div><a href="" class="text-white">Facebook</a></div>
-                <div><a href="" class="text-white">Instagram</a></div>
-                <div><a href="" class="text-white">Linkedin</a></div>
-                <div><a href="" class="text-white">Twitter</a></div>
+
+            {{-- Legal Links --}}
+            <div class="col-md-3 mb-4">
+                <h6 class="footer-heading">Legal</h6>
+                <ul class="footer-links mt-3">
+                    @php
+                        $legalPages = \App\Models\Page::where('status',1)
+                                        ->where('show_in_footer',1)
+                                        ->whereIn('slug',['privacy-policy','terms','disclaimer'])
+                                        ->get();
+                    @endphp
+
+                    @foreach($legalPages as $page)
+                        <li>
+                            <a href="{{ url($page->slug) }}">
+                                {{ $page->title }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
+
+            {{-- Newsletter --}}
+            <div class="col-md-3 mb-4">
+                <h6 class="footer-heading">Subscribe</h6>
+                <p class="footer-text">
+                    Get the latest coding tutorials directly in your inbox.
+                </p>
+
+                <form>
+                    <div class="input-group footer-input-group">
+                        <input type="email" class="form-control footer-input"
+                               placeholder="Enter your email">
+                        <button class="btn footer-btn">
+                            Subscribe
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <hr class="footer-divider">
+
+        <div class="footer-bottom text-center">
+            © {{ date('Y') }} </>MyBlog. All Rights Reserved.
         </div>
     </div>
-</div>
-<div class="py-2 bg-gray">
-    <div class="container text-center">
-        <p class="mb-0">
-            &copy; Copyright at <a href="#">Blog</a>
-            All right reserved.
-            Designed and Developed by XYZ.
-        </p>
-    </div>
-</div>
+</footer>
